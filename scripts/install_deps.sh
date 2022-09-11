@@ -8,7 +8,7 @@ sudo apt-get install libglfw3-dev libglfw3
 sudo apt-get install libassimp-dev
 
 # conda install ipython
-pip install -r requirements.txt
+/home/ludovico/anaconda3/envs/GDR/bin/pip3 install -r requirements.txt
 
 pip uninstall pillow
 CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
