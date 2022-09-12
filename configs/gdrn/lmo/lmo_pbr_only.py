@@ -44,9 +44,9 @@ SOLVER = dict(
 )
 
 DATASETS = dict(
-    TRAIN=("lmo_train",),
-    TRAIN2=("lmo_pbr_train",),
-    TRAIN2_RATIO=0.1,
+    TRAIN=("lmo_pbr_train",),
+    # TRAIN2=("lmo_pbr_train",),
+    # TRAIN2_RATIO=0.1,
     TEST=("lmo_test",),
     # AP	AP50	AR	inf.time
     # 60.657	89.625	66.2	0.024449

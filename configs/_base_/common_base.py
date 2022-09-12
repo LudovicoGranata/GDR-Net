@@ -84,7 +84,7 @@ DATASETS = dict(
 # -----------------------------------------------------------------------------
 DATALOADER = dict(
     # Number of data loading threads
-    NUM_WORKERS=4,
+    NUM_WORKERS=2,
     ASPECT_RATIO_GROUPING=False,  # default True in detectron2
     # Default sampler for dataloader
     # Options: TrainingSampler, RepeatFactorTrainingSampler
@@ -144,10 +144,10 @@ TRAIN = dict(
 # Specific val options
 # ---------------------------------------------------------------------------- #
 VAL = dict(
-    DATASET_NAME="lm",
+    DATASET_NAME="lmo",
     SCRIPT_PATH="lib/pysixd/scripts/eval_pose_results_more.py",
     RESULTS_PATH="",
-    TARGETS_FILENAME="lm_test_targets_bb8.json",
+    TARGETS_FILENAME="test_targets_bop19.json",
     ERROR_TYPES="ad,rete,re,te,proj",
     RENDERER_TYPE="cpp",  # cpp, python, egl, aae
     SPLIT="test",
@@ -157,7 +157,7 @@ VAL = dict(
     SCORE_ONLY=False,  # if the errors have been calculated
     EVAL_PRINT_ONLY=False,  # if the scores/recalls have been saved
     EVAL_PRECISION=False,  # use precision or recall
-    USE_BOP=False,  # whether to use bop toolkit
+    USE_BOP=True,  # whether to use bop toolkit
 )
 
 # ---------------------------------------------------------------------------- #

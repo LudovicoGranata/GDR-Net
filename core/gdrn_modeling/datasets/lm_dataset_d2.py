@@ -364,19 +364,19 @@ SPLITS_LM = dict(
     lmo_train=dict(
         name="lmo_train",
         # use lm real all (8 objects) to train for lmo
-        dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/"),
-        models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/models"),
+        dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/"),
+        models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/models"),
         objs=LM_OCC_OBJECTS,  # selected objects
         ann_files=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/image_set/{}_{}.txt".format(_obj, "all"))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/image_set/{}_{}.txt".format(_obj, "all"))
             for _obj in LM_OCC_OBJECTS
         ],
         image_prefixes=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/test/{:06d}".format(ref.lmo_full.obj2id[_obj]))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/{:06d}".format(ref.lmo_full.obj2id[_obj]))
             for _obj in LM_OCC_OBJECTS
         ],
         xyz_prefixes=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/test/xyz_crop/{:06d}".format(ref.lmo_full.obj2id[_obj]))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/xyz_crop/{:06d}".format(ref.lmo_full.obj2id[_obj]))
             for _obj in LM_OCC_OBJECTS
         ],
         scale_to_meter=0.001,
@@ -537,47 +537,47 @@ for obj in ref.lmo_full.objects:
             )
 
 # ================ add single image dataset for debug =======================================
-debug_im_ids = {"train": {obj: [] for obj in ref.lm_full.objects}, "test": {obj: [] for obj in ref.lm_full.objects}}
-for obj in ref.lm_full.objects:
-    for split in ["train", "test"]:
-        cur_ann_file = osp.join(DATASETS_ROOT, f"BOP_DATASETS/lm/image_set/{obj}_{split}.txt")
-        ann_files = [cur_ann_file]
+# debug_im_ids = {"train": {obj: [] for obj in ref.lm_full.objects}, "test": {obj: [] for obj in ref.lm_full.objects}}
+# for obj in ref.lm_full.objects:
+#     for split in ["train", "test"]:
+#         cur_ann_file = osp.join(DATASETS_ROOT, f"BOP_DATASETS/lm/image_set/{obj}_{split}.txt")
+#         ann_files = [cur_ann_file]
 
-        im_ids = []
-        with open(cur_ann_file, "r") as f:
-            for line in f:
-                # scene_id(obj_id)/im_id
-                im_ids.append("{}/{}".format(ref.lm_full.obj2id[obj], int(line.strip("\r\n"))))
+#         im_ids = []
+#         with open(cur_ann_file, "r") as f:
+#             for line in f:
+#                 # scene_id(obj_id)/im_id
+#                 im_ids.append("{}/{}".format(ref.lm_full.obj2id[obj], int(line.strip("\r\n"))))
 
-        debug_im_ids[split][obj] = im_ids
-        for debug_im_id in debug_im_ids[split][obj]:
-            name = "lm_single_{}{}_{}".format(obj, debug_im_id.split("/")[1], split)
-            if name not in SPLITS_LM:
-                SPLITS_LM[name] = dict(
-                    name=name,
-                    dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/"),
-                    models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/models"),
-                    objs=[obj],  # only this obj
-                    ann_files=ann_files,
-                    image_prefixes=[
-                        osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/{:06d}").format(ref.lm_full.obj2id[obj])
-                    ],
-                    xyz_prefixes=[
-                        osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/xyz_crop/{:06d}".format(ref.lm_full.obj2id[obj]))
-                    ],
-                    scale_to_meter=0.001,
-                    with_masks=True,  # (load masks but may not use it)
-                    with_depth=True,  # (load depth path here, but may not use it)
-                    height=480,
-                    width=640,
-                    cache_dir=osp.join(PROJ_ROOT, ".cache"),
-                    use_cache=True,
-                    num_to_load=-1,
-                    filter_invalid=False,
-                    filter_scene=True,
-                    ref_key="lm_full",
-                    debug_im_id=debug_im_id,  # NOTE: debug im id
-                )
+#         debug_im_ids[split][obj] = im_ids
+#         for debug_im_id in debug_im_ids[split][obj]:
+#             name = "lm_single_{}{}_{}".format(obj, debug_im_id.split("/")[1], split)
+#             if name not in SPLITS_LM:
+#                 SPLITS_LM[name] = dict(
+#                     name=name,
+#                     dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/"),
+#                     models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/models"),
+#                     objs=[obj],  # only this obj
+#                     ann_files=ann_files,
+#                     image_prefixes=[
+#                         osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/{:06d}").format(ref.lm_full.obj2id[obj])
+#                     ],
+#                     xyz_prefixes=[
+#                         osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/xyz_crop/{:06d}".format(ref.lm_full.obj2id[obj]))
+#                     ],
+#                     scale_to_meter=0.001,
+#                     with_masks=True,  # (load masks but may not use it)
+#                     with_depth=True,  # (load depth path here, but may not use it)
+#                     height=480,
+#                     width=640,
+#                     cache_dir=osp.join(PROJ_ROOT, ".cache"),
+#                     use_cache=True,
+#                     num_to_load=-1,
+#                     filter_invalid=False,
+#                     filter_scene=True,
+#                     ref_key="lm_full",
+#                     debug_im_id=debug_im_id,  # NOTE: debug im id
+#                 )
 
 
 def register_with_name_cfg(name, data_cfg=None):
