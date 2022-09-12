@@ -364,8 +364,8 @@ SPLITS_LM = dict(
     lmo_train=dict(
         name="lmo_train",
         # use lm real all (8 objects) to train for lmo
-        dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/"),
-        models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/models"),
+        dataset_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/"),
+        models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/models"),
         objs=LM_OCC_OBJECTS,  # selected objects
         ann_files=[
             osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/image_set/{}_{}.txt".format(_obj, "all"))
