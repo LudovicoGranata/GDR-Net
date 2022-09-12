@@ -368,15 +368,15 @@ SPLITS_LM = dict(
         models_root=osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/models"),
         objs=LM_OCC_OBJECTS,  # selected objects
         ann_files=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/image_set/{}_{}.txt".format(_obj, "all"))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/image_set/{}_{}.txt".format(_obj, "all"))
             for _obj in LM_OCC_OBJECTS
         ],
         image_prefixes=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/{:06d}".format(ref.lmo_full.obj2id[_obj]))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/test/{:06d}".format(ref.lmo_full.obj2id[_obj]))
             for _obj in LM_OCC_OBJECTS
         ],
         xyz_prefixes=[
-            osp.join(DATASETS_ROOT, "BOP_DATASETS/lm/test/xyz_crop/{:06d}".format(ref.lmo_full.obj2id[_obj]))
+            osp.join(DATASETS_ROOT, "BOP_DATASETS/lmo/test/xyz_crop/{:06d}".format(ref.lmo_full.obj2id[_obj]))
             for _obj in LM_OCC_OBJECTS
         ],
         scale_to_meter=0.001,
